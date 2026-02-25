@@ -13,24 +13,25 @@ def home():
     params = {
         "applicationId": APP_ID,
         "keyword": "美容",
-        "sort": "-reviewCount",
         "hits": 10
     }
 
-    res = requests.get(url, params=params)
-    data = res.json()
+    try:
+        res = requests.get(url, params=params, timeout=10)
+        data = res.json()
 
-    html = "<h1>楽天ROOM投稿候補</h1>"
+        if "Items" not in data:
+            return f"<h2>Rakuten API Error</h2><pre>{data}</pre>"
 
-    for item in data["Items"]:
+        html = "<h1>楽天ROOM投稿候補</h1>"
 
-        name = item["Item"]["itemName"]
-        item_url = item["Item"]["itemUrl"]
+        for item in data["Items"]:
+            name = item["Item"]["itemName"]
+            item_url = item["Item"]["itemUrl"]
 
-        html += f"""
-        <hr>
-        <h3>{name}</h3>
-        <a href="{item_url}">商品を見る</a>
-        """
+            html += f"<hr><h3>{name}</h3><a href='{item_url}'>商品を見る</a>"
 
-    return html
+        return html
+
+    except Exception as e:
+        return f"<h2>Server Error</h2><pre>{str(e)}</pre>"
