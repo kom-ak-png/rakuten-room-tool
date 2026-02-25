@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-APP_ID = "pk_GLJKE35rNkNa6GQSAI"
+APP_ID = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20170706?format=json&keyword=%E6%A5%BD%E5%A4%A9&genreId=555086&applicationId=bb7632e2-9861-4d58-a0ce-7ed4703f83db&accessKey=pk_GLJKE35rNkNaG6QSAM2OZTNrOgjm8cOc5r1NzBXI6Jz"
 
 @app.route("/")
 def home():
