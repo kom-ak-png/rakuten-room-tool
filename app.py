@@ -3,18 +3,19 @@ import requests
 
 app = Flask(__name__)
 
-APP_ID = "f2c7d495-1536-4184-a523-4adf0f6db0d1"
+APP_ID = "pk_GLJKE35rNkNa6GQSAI"
 
 @app.route("/")
 def home():
 
     url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
 
-    params = {
-        "applicationId": APP_ID,
-        "keyword": "美容",
-        "hits": 10
-    }
+params = {
+    "applicationId": APP_ID,
+    "keyword": "美容",
+    "sort": "-reviewCount",
+    "hits": 10
+}
 
     try:
         res = requests.get(url, params=params, timeout=10)
